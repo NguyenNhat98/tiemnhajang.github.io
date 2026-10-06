@@ -1,0 +1,14 @@
+@media (max-width: 760px) {
+  #gameBody { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
+  #sidebar { display: none; }
+  #mobileNav { display: grid !important; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--border); background: #fff2e2; }
+  #mobileNav button { padding: 10px 4px; background: none; border: none; font-size: 11px; color: var(--ink); min-height: 44px; }
+  #mobileNav button.active { color: var(--accent-dark); font-weight: 800; }
+  #panelArea { position: fixed; left: 0; right: 0; bottom: 56px; top: auto; max-height: 60vh; background: var(--panel);
+    border-top-left-radius: 14px; border-top-right-radius: 14px; box-shadow: 0 -6px 18px rgba(0,0,0,0.15); z-index: 40; }
+  #panelArea.closed { display: none; }
+  .stat-pill { font-size: 11px; padding: 3px 8px; }
+  .signboard h1 { font-size: 24px; }
+  .signboard { padding: 16px 22px; }
+}
+#mobileNav { display: none; }

@@ -1,0 +1,23 @@
+#titleScreen { background: linear-gradient(#bfe3f2 0%, #d8ecd0 55%, #cdbf93 55%, #cdbf93 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.street-scene { position: absolute; inset: 0; overflow: hidden; }
+.wire { position: absolute; top: 8%; left: 0; width: 140%; height: 2px; background: #5a4a3a; opacity: 0.4; transform: rotate(-2deg); }
+.tree { position: absolute; bottom: 44%; font-size: 48px; opacity: 0.85; }
+.house { position: absolute; bottom: 44%; font-size: 64px; opacity: 0.9; }
+.mover { position: absolute; bottom: 44%; font-size: 30px; animation: moveAcross linear infinite; }
+@keyframes moveAcross { from { transform: translateX(-10vw); } to { transform: translateX(110vw); } }
+.bob { animation: bob 1.6s ease-in-out infinite; }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+.signboard {
+  position: relative; z-index: 2; background: #fffaf2; border: 6px solid #8a5a34; border-radius: 10px;
+  padding: 22px 36px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+.signboard h1 { margin: 0; font-size: 34px; color: var(--accent-dark); letter-spacing: 1px; }
+.signboard p { margin: 8px 0 0; font-style: italic; color: var(--muted); }
+
+.title-buttons { position: relative; z-index: 2; margin-top: 26px; display: flex; flex-direction: column; gap: 10px; width: 260px; }
+.title-buttons .btn { font-size: 15px; padding: 12px; }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(30,20,10,0.55); display: flex; align-items: center; justify-content: center; z-index: 90; padding: 16px; }
+.modal-box { background: #fff; border-radius: 12px; max-width: 480px; width: 100%; padding: 20px; max-height: 88vh; overflow-y: auto; }
+.modal-box h2 { margin-top: 0; color: var(--accent-dark); }
