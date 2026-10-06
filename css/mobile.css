@@ -1,14 +1,31 @@
-@media (max-width: 760px) {
-  #gameBody { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
-  #sidebar { display: none; }
-  #mobileNav { display: grid !important; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--border); background: #fff2e2; }
-  #mobileNav button { padding: 10px 4px; background: none; border: none; font-size: 11px; color: var(--ink); min-height: 44px; }
+@media (max-width: 900px), (pointer: coarse) {
+  #gameScreen { height: 100dvh; overflow: hidden; }
+  #gameTopbar { gap: 5px; padding: 7px 9px; }
+  #gameTopbar .brand { width: 100%; font-size: 14px; }
+  #headerStats { display: flex; width: 100%; gap: 4px; overflow-x: auto; }
+  #headerStats .stat-pill { flex: 0 0 auto; }
+  #gameTopbar .spacer { display: none; }
+  #gameBody { flex: 1 1 auto; min-height: 0; display: block; }
+  #sidebar { display: none !important; }
+  #worldArea { height: 100%; min-height: 0; overflow: hidden; }
+  #canvasWrap { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; }
+  #mobileNav {
+    display: grid !important; position: relative; z-index: 45;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(2, 44px);
+    flex: 0 0 auto; border-top: 1px solid var(--border); background: #f3f7e9;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  #mobileNav button { padding: 4px 2px; background: none; border: none; font-size: 10px; line-height: 1.15; color: var(--ink); min-width: 0; min-height: 44px; }
   #mobileNav button.active { color: var(--accent-dark); font-weight: 800; }
-  #panelArea { position: fixed; left: 0; right: 0; bottom: 56px; top: auto; max-height: 60vh; background: var(--panel);
+  #panelArea { position: fixed; left: 0; right: 0; bottom: calc(140px + env(safe-area-inset-bottom)); top: auto; max-height: 58vh; background: var(--panel);
     border-top-left-radius: 14px; border-top-right-radius: 14px; box-shadow: 0 -6px 18px rgba(0,0,0,0.15); z-index: 40; }
   #panelArea.closed { display: none; }
   .stat-pill { font-size: 11px; padding: 3px 8px; }
   .signboard h1 { font-size: 24px; }
   .signboard { padding: 16px 22px; }
+  #timeBar { gap: 6px; padding: 6px 8px; }
+  #timeLabel { font-size: 10px; }
+  .speed-btns button { padding: 7px 9px; }
+  #btnOpenClose { min-height: 38px; }
 }
 #mobileNav { display: none; }

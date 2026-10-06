@@ -1,7 +1,7 @@
 :root {
-  --bg: #f4ede1; --panel: #fffaf2; --ink: #2e2420; --muted: #8a7a6b;
-  --accent: #d9622b; --accent-dark: #b84f1f; --green: #3f8a4a; --red: #c0392b; --yellow: #d8a53d;
-  --border: #e3d5c0; --radius: 10px;
+  --bg: #edf4e8; --panel: #fffdf3; --ink: #28372a; --muted: #71816c;
+  --accent: #39804a; --accent-dark: #28643a; --green: #45894d; --red: #c24f3f; --yellow: #d5a642;
+  --border: #d6e1cc; --radius: 12px;
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
 }
 * { box-sizing: border-box; }

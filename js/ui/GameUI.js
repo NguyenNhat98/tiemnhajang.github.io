@@ -45,7 +45,7 @@ export function mountGameScreen(container, engine, renderer, world, sfx, handler
         <div id="panelArea"></div>
       </div>
     </div>
-    <div id="mobileNav">${TABS.slice(0, 4).map(([id, label]) => `<button data-tab="${id}">${label.split(' ')[0]}</button>`).join('')}</div>
+    <div id="mobileNav">${TABS.map(([id, label]) => `<button data-tab="${id}">${label}</button>`).join('')}</div>
     <div id="timeBar">
       <span id="timeLabel" class="stat-pill"></span>
       <div class="time-track"><div id="timeFill"></div></div>
@@ -79,15 +79,17 @@ export function mountGameScreen(container, engine, renderer, world, sfx, handler
     renderEventModal(eventModalRoot, engine, () => { refreshPanel(); refreshHeader(); });
   }
 
-  function setTab(tab) {
+  function setTab(tab, fromClick = true) {
+    const mobile = window.matchMedia('(max-width: 900px), (pointer: coarse)').matches;
+    const sameTab = uiState.tab === tab;
     uiState.tab = tab;
     container.querySelectorAll('#sidebar button, #mobileNav button').forEach((b) => b.classList.toggle('active', b.dataset.tab === tab));
-    uiState.mobilePanelOpen = true;
-    panelArea.classList.remove('closed');
+    uiState.mobilePanelOpen = mobile ? (fromClick && sameTab ? !uiState.mobilePanelOpen : fromClick) : true;
+    panelArea.classList.toggle('closed', mobile && !uiState.mobilePanelOpen);
     refreshPanel();
   }
-  container.querySelectorAll('#sidebar button, #mobileNav button').forEach((b) => { b.onclick = () => setTab(b.dataset.tab); });
-  setTab('inventory');
+  container.querySelectorAll('#sidebar button, #mobileNav button').forEach((b) => { b.onclick = () => setTab(b.dataset.tab, true); });
+  setTab('inventory', false);
 
   function refreshHeader() {
     const s = engine.state;

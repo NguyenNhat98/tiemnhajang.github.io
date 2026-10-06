@@ -1,6 +1,6 @@
 #gameScreen { display: flex; flex-direction: column; background: var(--bg); }
 #gameTopbar {
-  display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #e07a37, #c85a22);
+  display: flex; align-items: center; gap: 10px; background: linear-gradient(115deg, #347c48, #56a05b);
   color: #fff; padding: 8px 14px; flex-wrap: wrap; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 #gameTopbar .brand { font-weight: 800; }
@@ -8,15 +8,15 @@
 #gameTopbar .spacer { flex: 1; }
 
 #gameBody { flex: 1; display: grid; grid-template-columns: 180px 1fr; min-height: 0; }
-#sidebar { background: #fff2e2; border-right: 2px solid var(--border); display: flex; flex-direction: column; padding: 8px; gap: 4px; overflow-y: auto; }
+#sidebar { background: #f3f7e9; border-right: 2px solid var(--border); display: flex; flex-direction: column; padding: 8px; gap: 4px; overflow-y: auto; }
 #sidebar button { text-align: left; background: none; border: none; padding: 9px 10px; border-radius: 8px; font-size: 13px; color: var(--ink); font-weight: 600; }
 #sidebar button.active { background: var(--accent); color: #fff; }
 #sidebar button:not(.active):hover { background: #ffe2c2; }
 
 #worldArea { display: flex; flex-direction: column; min-width: 0; }
-#canvasWrap { position: relative; background: #000; }
+#canvasWrap { position: relative; background: #9bd8e8; overflow: hidden; }
 #gameCanvas { width: 100%; display: block; }
-#queueStrip { display: flex; gap: 6px; padding: 6px 10px; overflow-x: auto; background: #fff7ea; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+#queueStrip { display: flex; gap: 6px; padding: 6px 10px; overflow-x: auto; background: #f8faee; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .queue-chip { flex: 0 0 auto; border: 2px solid var(--border); border-radius: 8px; padding: 6px 10px; background: #fff; cursor: pointer; font-size: 11.5px; min-width: 108px; }
 .queue-chip.active { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(217,98,43,0.25); }
 .patience-bar { height: 5px; background: #eee; border-radius: 3px; margin-top: 4px; overflow: hidden; }

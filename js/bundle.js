@@ -2011,47 +2011,69 @@
   // js/render/WorldRenderer.js
   var WorldRenderer = {
     drawBackground(ctx, state) {
-      const isEvening = state.time >= 18;
-      const sky = isEvening ? ["#2b2440", "#4a3b63"] : ["#bfe3f2", "#e8f6e0"];
-      const grad = ctx.createLinearGradient(0, 0, 0, WORLD_H);
-      grad.addColorStop(0, sky[0]);
-      grad.addColorStop(1, sky[1]);
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, WORLD_W, WORLD_H);
-      ctx.fillStyle = "#d7c6a8";
-      ctx.fillRect(0, WORLD_H - 60, WORLD_W, 60);
-      ctx.strokeStyle = "rgba(0,0,0,0.08)";
-      for (let x = 0; x < WORLD_W; x += 40) {
-        ctx.beginPath();
-        ctx.moveTo(x, WORLD_H - 60);
-        ctx.lineTo(x, WORLD_H);
-        ctx.stroke();
+      const evening = state.time >= 18;
+      const sky = ctx.createLinearGradient(0, 0, 0, WORLD_H);
+      sky.addColorStop(0, evening ? "#66749a" : "#9bd8e8");
+      sky.addColorStop(.52, evening ? "#f1b37d" : "#d9edc1");
+      sky.addColorStop(.521, "#e7c58a"); sky.addColorStop(1, "#bd8755");
+      ctx.fillStyle = sky; ctx.fillRect(0, 0, WORLD_W, WORLD_H);
+      for (let i = 0; i < 7; i++) {
+        const x = i * 132 - 18, h = 55 + (i % 3) * 17;
+        ctx.fillStyle = evening ? "#56685a" : "#82a86a"; ctx.fillRect(x, 180 - h, 105, h);
+        ctx.fillStyle = "#d7b07a"; ctx.fillRect(x + 9, 190 - h, 87, h - 10);
+        for (let j = 0; j < 3; j++) { ctx.fillStyle = "#687f50"; ctx.fillRect(x + j * 34 + 7, 164 - h, 25, 22); }
       }
-      ctx.fillStyle = "#7a5230";
-      ctx.fillRect(4, WORLD_H - 92, 44, 32);
-      ctx.fillStyle = "#fdf6e8";
-      ctx.font = "11px Segoe UI";
-      ctx.fillText("C\u1EECA", 10, WORLD_H - 76);
+      ctx.fillStyle = "#f8e6bf"; ctx.fillRect(0, 142, WORLD_W, 180);
+      ctx.fillStyle = "#d4a56a"; ctx.fillRect(0, 142, WORLD_W, 9);
+      ctx.fillStyle = "#fff9e8"; ctx.fillRect(44, 160, 712, 143);
+      ctx.fillStyle = "#6a4530"; ctx.fillRect(41, 154, 718, 8);
+      ctx.fillStyle = "#39734a"; ctx.fillRect(48, 164, 704, 29);
+      for (let x = 48; x < 752; x += 44) {
+        ctx.fillStyle = Math.floor((x - 48) / 44) % 2 ? "#e9a34d" : "#f7d577";
+        ctx.beginPath(); ctx.moveTo(x, 193); ctx.lineTo(x + 44, 193); ctx.lineTo(x + 38, 204); ctx.lineTo(x + 6, 204); ctx.closePath(); ctx.fill();
+      }
+      ctx.fillStyle = "#fff5d6"; roundRect(ctx, 275, 122, 250, 42, 9); ctx.fill();
+      ctx.strokeStyle = "#8e5435"; ctx.lineWidth = 4; roundRect(ctx, 275, 122, 250, 42, 9); ctx.stroke();
+      ctx.fillStyle = "#346342"; ctx.font = "bold 17px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(state.storeName || "TIỆM TẠP HÓA", 400, 149, 230);
+      ctx.fillStyle = "#bfe4dd"; ctx.fillRect(58, 205, 112, 89); ctx.fillRect(630, 205, 112, 89);
+      ctx.strokeStyle = "#936442"; ctx.lineWidth = 5; ctx.strokeRect(58, 205, 112, 89); ctx.strokeRect(630, 205, 112, 89);
+      ctx.fillStyle = "#c6e8e0"; ctx.fillRect(69, 214, 91, 69); ctx.fillRect(641, 214, 91, 69);
+      ctx.fillStyle = "#76995c"; ctx.fillRect(104, 214, 5, 69); ctx.fillRect(676, 214, 5, 69);
+      ctx.fillStyle = "#efd9ad"; ctx.fillRect(0, 303, WORLD_W, 117);
+      for (let y = 304; y < WORLD_H; y += 28) for (let x = (Math.floor(y / 28) % 2) * 24; x < WORLD_W; x += 48) {
+        ctx.fillStyle = "rgba(151,105,58,.12)"; ctx.fillRect(x, y, 46, 26);
+      }
+      ctx.fillStyle = "#4e7952"; roundRect(ctx, 78, 291, 75, 15, 3); ctx.fill();
+      ctx.fillStyle = "#fff4d5"; ctx.font = "bold 8px Segoe UI"; ctx.fillText("WELCOME", 115, 302);
+      [[20,275],[766,275]].forEach(([x,y]) => {
+        ctx.fillStyle = "#bc7445"; ctx.fillRect(x, y + 18, 22, 15);
+        ctx.fillStyle = "#4d874f"; ctx.beginPath(); ctx.arc(x+11,y+12,13,0,Math.PI*2); ctx.fill();
+        ctx.fillStyle = "#79a956"; ctx.beginPath(); ctx.arc(x+5,y+8,7,0,Math.PI*2); ctx.fill();
+      });
+      if (evening) { ctx.fillStyle = "rgba(38,42,76,.17)"; ctx.fillRect(0, 0, WORLD_W, WORLD_H); }
     },
     drawCounter(ctx, counter) {
-      ctx.fillStyle = "#8a5a34";
-      ctx.fillRect(counter.x, counter.y, counter.w, counter.h);
-      ctx.fillStyle = "#c99a66";
-      ctx.fillRect(counter.x, counter.y, counter.w, 8);
-      ctx.fillStyle = "#2e2420";
-      ctx.font = "bold 12px Segoe UI";
-      ctx.textAlign = "center";
-      ctx.fillText("QU\u1EA6Y", counter.x + counter.w / 2, counter.y + counter.h / 2 + 4);
+      ctx.fillStyle = "rgba(62,42,27,.18)"; roundRect(ctx, counter.x - 3, counter.y + 5, counter.w + 6, counter.h + 4, 8); ctx.fill();
+      ctx.fillStyle = "#8b5434"; roundRect(ctx, counter.x, counter.y, counter.w, counter.h, 7); ctx.fill();
+      ctx.fillStyle = "#d9a766"; roundRect(ctx, counter.x, counter.y, counter.w, 13, 5); ctx.fill();
+      ctx.fillStyle = "#fff3da"; ctx.font = "bold 12px Segoe UI"; ctx.textAlign = "center"; ctx.fillText("THANH TOÁN", counter.x + counter.w / 2, counter.y + 31);
+      ctx.fillStyle = "#f4d78b"; ctx.fillRect(counter.x + 14, counter.y - 10, 22, 10);
+      ctx.fillStyle = "#78a45b"; ctx.fillRect(counter.x + 45, counter.y - 8, 17, 8);
+      ctx.fillStyle = "#df9860"; ctx.fillRect(counter.x + 69, counter.y - 11, 23, 11);
+      ctx.fillStyle = "#f4d78b"; ctx.fillRect(counter.x + 102, counter.y - 9, 20, 9);
     },
     drawShelves(ctx, shelves) {
       shelves.forEach((s) => {
-        ctx.fillStyle = "#efe2c9";
-        ctx.fillRect(s.x, s.y, s.w, s.h);
-        ctx.strokeStyle = "#c7a96f";
-        ctx.strokeRect(s.x, s.y, s.w, s.h);
-        ctx.font = "18px Segoe UI";
-        ctx.textAlign = "center";
-        ctx.fillText(s.cat.icon, s.x + s.w / 2, s.y + s.h / 2 + 7);
+        ctx.fillStyle = "rgba(65,43,25,.16)"; roundRect(ctx, s.x + 2, s.y + 4, s.w, s.h, 4); ctx.fill();
+        ctx.fillStyle = "#a76d3d"; roundRect(ctx, s.x, s.y, s.w, s.h, 4); ctx.fill();
+        ctx.fillStyle = "#f3d59b"; ctx.fillRect(s.x + 3, s.y + 3, s.w - 6, s.h - 8);
+        const colors = ["#df704d","#79a85d","#e6b64f","#6394aa","#b17aa1"];
+        for (let i = 0; i < 4; i++) {
+          ctx.fillStyle = colors[(i + Math.floor(s.x / 10)) % colors.length]; ctx.fillRect(s.x + 6 + i * 13, s.y + 8 + (i % 2) * 2, 10, 15);
+          ctx.fillStyle = "rgba(255,255,255,.45)"; ctx.fillRect(s.x + 8 + i * 13, s.y + 10 + (i % 2) * 2, 2, 8);
+        }
+        ctx.fillStyle = "#795033"; ctx.fillRect(s.x + 2, s.y + s.h - 7, s.w - 4, 5);
+        ctx.fillStyle = "#fff8e8"; ctx.font = "15px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(s.cat.icon, s.x + s.w / 2, s.y + s.h - 3);
       });
     }
   };
@@ -2745,7 +2767,7 @@
         <div id="panelArea"></div>
       </div>
     </div>
-    <div id="mobileNav">${TABS.slice(0, 4).map(([id, label]) => `<button data-tab="${id}">${label.split(" ")[0]}</button>`).join("")}</div>
+    <div id="mobileNav">${TABS.map(([id, label]) => `<button data-tab="${id}">${label}</button>`).join("")}</div>
     <div id="timeBar">
       <span id="timeLabel" class="stat-pill"></span>
       <div class="time-track"><div id="timeFill"></div></div>
@@ -2778,17 +2800,19 @@
         refreshHeader();
       });
     }
-    function setTab(tab) {
+    function setTab(tab, fromClick = true) {
+      const mobile = window.matchMedia("(max-width: 900px), (pointer: coarse)").matches;
+      const sameTab = uiState.tab === tab;
       uiState.tab = tab;
       container.querySelectorAll("#sidebar button, #mobileNav button").forEach((b) => b.classList.toggle("active", b.dataset.tab === tab));
-      uiState.mobilePanelOpen = true;
-      panelArea.classList.remove("closed");
+      uiState.mobilePanelOpen = mobile ? fromClick && sameTab ? !uiState.mobilePanelOpen : fromClick : true;
+      panelArea.classList.toggle("closed", mobile && !uiState.mobilePanelOpen);
       refreshPanel();
     }
     container.querySelectorAll("#sidebar button, #mobileNav button").forEach((b) => {
-      b.onclick = () => setTab(b.dataset.tab);
+      b.onclick = () => setTab(b.dataset.tab, true);
     });
-    setTab("inventory");
+    setTab("inventory", false);
     function refreshHeader() {
       const s = engine2.state;
       const phaseLabel = s.phase === DAY_PHASES.OPEN ? "\u0110ang m\u1EDF c\u1EEDa" : s.phase === DAY_PHASES.REPORT ? "\u0110\xE3 \u0111\xF3ng c\u1EEDa" : "Chu\u1EA9n b\u1ECB";
