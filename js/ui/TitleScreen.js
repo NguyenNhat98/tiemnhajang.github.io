@@ -74,12 +74,16 @@ function showSettingsModal(handlers) {
 
 function showHelpModal() {
   modal(`
-    <h2>? Hướng dẫn chơi</h2>
-    <p>Mỗi ngày từ 06:30–21:30: nhập hàng, đặt giá, mở cửa rồi phục vụ khách lần lượt.</p>
-    <p>Chọn khách trong hàng chờ, lấy đúng món khách yêu cầu trước khi khách hết kiên nhẫn, rồi bấm Thanh toán.</p>
-    <p>Hàng hóa theo lô (batch) có hạn sử dụng — hệ thống luôn bán lô sắp hết hạn trước.</p>
-    <p>Cuối ngày sẽ có báo cáo lãi/lỗ. Dùng tiền lãi để thuê nhân viên, mua thiết bị, mở dịch vụ, chạy quảng cáo.</p>
-    <p>Mục tiêu: đạt tổng tài sản 300.000.000đ. Để tiền âm 3 ngày liên tiếp sẽ phá sản.</p>
+    <h2>🌿 Một ngày ở tiệm tạp hóa</h2>
+    <ol class="story-steps">
+      <li><b>Buổi sáng:</b> xem kho, nhập thêm món sắp hết và điều chỉnh giá bán.</li>
+      <li><b>Khách ghé tiệm:</b> chạm vào thẻ khách đang chờ để nghe và xem danh sách món họ cần.</li>
+      <li><b>Soạn giỏ hàng:</b> lấy từng món khách gọi. Kiểm tra biểu tượng, số lượng và thanh tiến độ; món đã lấy sẽ được đánh dấu.</li>
+      <li><b>Ra quầy:</b> khi đã đủ tất cả món, nút “Mang ra quầy” sẽ sáng. Chạm để hoàn tất đơn và nhận tiền.</li>
+      <li><b>Cuối ngày:</b> đọc báo cáo rồi dùng lợi nhuận nâng cấp tiệm, thuê nhân viên và mở dịch vụ mới.</li>
+    </ol>
+    <p class="muted">Khách sẽ mất kiên nhẫn nếu phải chờ lâu. Hàng được lấy theo hạn sử dụng gần nhất trước.</p>
+    <p class="muted">Mục tiêu: đạt tổng tài sản 300.000.000đ. Nếu tiền âm 3 ngày liên tiếp, tiệm sẽ phá sản.</p>
     <button class="btn block" id="helpClose">Đã hiểu</button>
   `).querySelector('#helpClose').onclick = (e) => e.target.closest('.modal-overlay').remove();
 }

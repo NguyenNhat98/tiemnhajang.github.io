@@ -10,17 +10,18 @@ button { font-family: inherit; cursor: pointer; }
 .screen { position: fixed; inset: 0; overflow: auto; }
 .hidden { display: none !important; }
 
-.btn { background: var(--accent); color: #fff; border: none; padding: 9px 16px; border-radius: 8px; font-size: 14px; font-weight: 700; }
+.btn { background: var(--accent); color: #fff; border: none; padding: 9px 16px; border-radius: 10px; font-size: 13px; font-weight: 750; box-shadow: 0 2px 5px rgba(31,70,39,.12); transition: transform .12s ease, background .12s ease, box-shadow .12s ease; }
+.btn:active { transform: translateY(1px); box-shadow: none; }
 .btn:hover { background: var(--accent-dark); }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.btn.secondary { background: #e9ddc9; color: var(--ink); }
-.btn.secondary:hover { background: #ddceb3; }
+.btn.secondary { background: #eff2e9; color: var(--ink); }
+.btn.secondary:hover { background: #e2e9dc; }
 .btn.danger { background: var(--red); }
 .btn.success { background: var(--green); }
 .btn.small { padding: 5px 10px; font-size: 12px; }
 .btn.block { width: 100%; }
 
-.panel-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; }
+.panel-card { background: var(--panel); border: 1px solid var(--border); border-radius: 15px; padding: 16px; box-shadow: 0 4px 16px rgba(36,58,39,.045); }
 .muted { color: var(--muted); font-size: 12px; }
 table { width: 100%; border-collapse: collapse; font-size: 12px; }
 th, td { padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--border); }
@@ -41,3 +42,5 @@ input[type=number], input[type=text] { padding: 5px 8px; border: 1px solid var(-
 .empty-hint { color: var(--muted); font-size: 12px; text-align: center; padding: 18px; }
 .toast-wrap { position: fixed; bottom: 14px; right: 14px; display: flex; flex-direction: column; gap: 6px; z-index: 80; }
 .toast { background: var(--ink); color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+.story-steps { padding-left: 24px; }
+.story-steps li { margin: 0 0 12px; line-height: 1.5; }

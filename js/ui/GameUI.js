@@ -67,12 +67,23 @@ export function mountGameScreen(container, engine, renderer, world, sfx, handler
   const panelArea = container.querySelector('#panelArea');
   const queueStrip = container.querySelector('#queueStrip');
   const eventModalRoot = container.querySelector('#eventModalRoot');
+  let lastOrderCustomerId = null;
 
   function refreshPanel() {
     renderQueueStrip(queueStrip, engine, refreshPanel);
     if (engine.activeCustomerId && engine.state.customers.some((c) => c.id === engine.activeCustomerId)) {
+      if (window.matchMedia('(max-width: 900px), (pointer: coarse)').matches && lastOrderCustomerId !== engine.activeCustomerId) {
+        uiState.mobilePanelOpen = true;
+        panelArea.classList.remove('closed');
+      }
+      lastOrderCustomerId = engine.activeCustomerId;
       renderOrderPanel(panelArea, engine, refreshPanel);
     } else {
+      if (window.matchMedia('(max-width: 900px), (pointer: coarse)').matches && lastOrderCustomerId !== null) {
+        uiState.mobilePanelOpen = false;
+        panelArea.classList.add('closed');
+      }
+      lastOrderCustomerId = null;
       const fn = PANEL_RENDERERS[uiState.tab] || renderInventoryPanel;
       fn(panelArea, engine, refreshPanel);
     }

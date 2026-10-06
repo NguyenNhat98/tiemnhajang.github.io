@@ -2087,13 +2087,13 @@
       if (logicalCustomer) {
         const ratio = logicalCustomer.maxPatience ? logicalCustomer.patience / logicalCustomer.maxPatience : 1;
         ctx.fillStyle = ratio < 0.3 ? "#c0392b" : ratio < 0.6 ? "#d8a53d" : "#3f8a4a";
-        ctx.fillRect(x - 12, y - 34, 24 * Math.max(0, ratio), 3);
+        ctx.fillRect(x - 15, y - 57, 30 * Math.max(0, ratio), 4);
         ctx.strokeStyle = "rgba(0,0,0,0.3)";
-        ctx.strokeRect(x - 12, y - 34, 24, 3);
+        ctx.strokeRect(x - 15, y - 57, 30, 4);
         const emoji = actor.state === "ANGRY" ? "\u{1F620}" : actor.state === "HAPPY" ? "\u{1F60A}" : ratio < 0.3 ? "\u{1F620}" : ratio < 0.6 ? "\u{1F610}" : "\u{1F642}";
         ctx.font = "14px Segoe UI";
         ctx.textAlign = "center";
-        ctx.fillText(emoji, x, y - 38);
+        ctx.fillText(emoji, x, y - 63);
       }
       if (actor.bubble) {
         ctx.font = "11px Segoe UI";
@@ -2101,36 +2101,38 @@
         const w = Math.min(160, ctx.measureText(actor.bubble).width + 16);
         ctx.fillStyle = "rgba(255,255,255,0.95)";
         ctx.strokeStyle = "#d9622b";
-        roundRect(ctx, x - w / 2, y - 64, w, 22, 6);
+        roundRect(ctx, x - w / 2, y - 83, w, 22, 7);
         ctx.fill();
         ctx.stroke();
         ctx.fillStyle = "#2e2420";
-        ctx.fillText(actor.bubble, x, y - 49, w - 8);
+        ctx.fillText(actor.bubble, x, y - 68, w - 8);
       }
       ctx.font = "9px Segoe UI";
       ctx.fillStyle = "#2e2420";
       ctx.textAlign = "center";
-      if (logicalCustomer) ctx.fillText(logicalCustomer.name, x, y + 16);
+      if (logicalCustomer) ctx.fillText(logicalCustomer.name, x, y + 22);
     },
     drawStaff(ctx, actor, staff) {
       const bounce = Math.sin(actor.animTime * 3) * 1;
       drawPerson(ctx, actor.x, actor.y + bounce, "#e0ab73", actor.outfit);
-      ctx.font = "9px Segoe UI";
+      ctx.font = "bold 9px Segoe UI";
       ctx.fillStyle = "#2e2420";
       ctx.textAlign = "center";
-      if (staff) ctx.fillText(staff.name.split(" ").pop(), actor.x, actor.y + 16);
+      if (staff) ctx.fillText(staff.name.split(" ").pop(), actor.x, actor.y + 22);
     }
   };
   function drawPerson(ctx, x, y, skin, outfit) {
-    ctx.fillStyle = outfit;
-    ctx.fillRect(x - 6, y - 14, 12, 16);
-    ctx.beginPath();
-    ctx.arc(x, y - 20, 6, 0, Math.PI * 2);
-    ctx.fillStyle = skin;
-    ctx.fill();
-    ctx.fillStyle = "#2e2420";
-    ctx.fillRect(x - 6, y + 2, 4, 8);
-    ctx.fillRect(x + 2, y + 2, 4, 8);
+    ctx.fillStyle = "rgba(39,51,34,.16)"; ctx.beginPath(); ctx.ellipse(x, y + 10, 13, 4, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#4b4038"; roundRect(ctx, x - 8, y - 2, 6, 13, 3); ctx.fill(); roundRect(ctx, x + 2, y - 2, 6, 13, 3); ctx.fill();
+    ctx.fillStyle = "#342f2c"; roundRect(ctx, x - 10, y + 7, 8, 4, 2); ctx.fill(); roundRect(ctx, x + 2, y + 7, 8, 4, 2); ctx.fill();
+    ctx.fillStyle = skin; roundRect(ctx, x - 14, y - 31, 7, 22, 4); ctx.fill(); roundRect(ctx, x + 7, y - 31, 7, 22, 4); ctx.fill();
+    ctx.fillStyle = outfit; roundRect(ctx, x - 11, y - 34, 22, 34, 7); ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.beginPath(); ctx.moveTo(x - 5, y - 33); ctx.lineTo(x, y - 27); ctx.lineTo(x + 5, y - 33); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = "rgba(35,50,36,.2)"; ctx.fillRect(x + 3, y - 17, 4, 6);
+    ctx.fillStyle = skin; ctx.beginPath(); ctx.arc(x, y - 43, 11, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#4b3329"; ctx.beginPath(); ctx.arc(x, y - 47, 11, Math.PI, Math.PI * 2); ctx.lineTo(x + 10, y - 42); ctx.quadraticCurveTo(x + 4, y - 45, x, y - 42); ctx.quadraticCurveTo(x - 6, y - 45, x - 10, y - 41); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = "#362d28"; ctx.beginPath(); ctx.arc(x - 3.5, y - 42, 1, 0, Math.PI * 2); ctx.arc(x + 3.5, y - 42, 1, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = "rgba(83,48,39,.8)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(x, y - 39, 3, .15, Math.PI - .15); ctx.stroke();
   }
   function roundRect(ctx, x, y, w, h, r) {
     ctx.beginPath();
@@ -2290,13 +2292,17 @@
   }
   function showHelpModal() {
     modal(`
-    <h2>? H\u01B0\u1EDBng d\u1EABn ch\u01A1i</h2>
-    <p>M\u1ED7i ng\xE0y t\u1EEB 06:30\u201321:30: nh\u1EADp h\xE0ng, \u0111\u1EB7t gi\xE1, m\u1EDF c\u1EEDa r\u1ED3i ph\u1EE5c v\u1EE5 kh\xE1ch l\u1EA7n l\u01B0\u1EE3t.</p>
-    <p>Ch\u1ECDn kh\xE1ch trong h\xE0ng ch\u1EDD, l\u1EA5y \u0111\xFAng m\xF3n kh\xE1ch y\xEAu c\u1EA7u tr\u01B0\u1EDBc khi kh\xE1ch h\u1EBFt ki\xEAn nh\u1EABn, r\u1ED3i b\u1EA5m Thanh to\xE1n.</p>
-    <p>H\xE0ng h\xF3a theo l\xF4 (batch) c\xF3 h\u1EA1n s\u1EED d\u1EE5ng \u2014 h\u1EC7 th\u1ED1ng lu\xF4n b\xE1n l\xF4 s\u1EAFp h\u1EBFt h\u1EA1n tr\u01B0\u1EDBc.</p>
-    <p>Cu\u1ED1i ng\xE0y s\u1EBD c\xF3 b\xE1o c\xE1o l\xE3i/l\u1ED7. D\xF9ng ti\u1EC1n l\xE3i \u0111\u1EC3 thu\xEA nh\xE2n vi\xEAn, mua thi\u1EBFt b\u1ECB, m\u1EDF d\u1ECBch v\u1EE5, ch\u1EA1y qu\u1EA3ng c\xE1o.</p>
-    <p>M\u1EE5c ti\xEAu: \u0111\u1EA1t t\u1ED5ng t\xE0i s\u1EA3n 300.000.000\u0111. \u0110\u1EC3 ti\u1EC1n \xE2m 3 ng\xE0y li\xEAn ti\u1EBFp s\u1EBD ph\xE1 s\u1EA3n.</p>
-    <button class="btn block" id="helpClose">\u0110\xE3 hi\u1EC3u</button>
+    <h2>🌿 Một ngày ở tiệm tạp hóa</h2>
+    <ol class="story-steps">
+      <li><b>Buổi sáng:</b> xem kho, nhập thêm món sắp hết và điều chỉnh giá bán.</li>
+      <li><b>Khách ghé tiệm:</b> chạm vào thẻ khách đang chờ để xem danh sách món họ cần.</li>
+      <li><b>Soạn giỏ hàng:</b> lấy từng món khách gọi. Kiểm tra biểu tượng, số lượng và thanh tiến độ.</li>
+      <li><b>Ra quầy:</b> khi đã lấy đủ mọi món, chạm “Mang ra quầy” để hoàn tất đơn và nhận tiền.</li>
+      <li><b>Cuối ngày:</b> xem báo cáo rồi dùng lợi nhuận nâng cấp tiệm, thuê nhân viên và mở dịch vụ.</li>
+    </ol>
+    <p class="muted">Khách sẽ mất kiên nhẫn nếu phải chờ lâu. Hàng được lấy theo hạn sử dụng gần nhất trước.</p>
+    <p class="muted">Mục tiêu: đạt tổng tài sản 300.000.000đ. Nếu tiền âm 3 ngày liên tiếp, tiệm sẽ phá sản.</p>
+    <button class="btn block" id="helpClose">Đã hiểu</button>
   `).querySelector("#helpClose").onclick = (e) => e.target.closest(".modal-overlay").remove();
   }
   function showAchievementsModal() {
@@ -2334,19 +2340,17 @@
 
   // js/ui/CustomerUI.js
   function renderQueueStrip(container, engine2, refresh) {
-    const state = engine2.state;
-    if (!state.customers.length) {
-      container.innerHTML = `<span class="muted" style="padding:6px;">Ch\u01B0a c\xF3 kh\xE1ch... \u0111ang ch\u1EDD kh\xE1ch gh\xE9 \u{1F642}</span>`;
+    const customers = engine2.state.customers;
+    if (!customers.length) {
+      container.innerHTML = '<div class="queue-empty"><span class="queue-empty-icon">☕</span><span>Chưa có khách ghé tiệm</span></div>';
       return;
     }
-    container.innerHTML = state.customers.map((c) => {
+    container.innerHTML = `<div class="queue-heading"><span>ĐANG CHỜ</span><b>${customers.length}</b></div><div class="queue-list">${customers.map((c) => {
       const pct = Math.round(c.patience / c.maxPatience * 100);
       const cls = pct < 30 ? "low" : pct < 60 ? "mid" : "";
-      return `<div class="queue-chip ${engine2.activeCustomerId === c.id ? "active" : ""}" data-cid="${c.id}">
-      <b>${c.name}</b><br/><span class="muted">${c.personality}</span>
-      <div class="patience-bar ${cls}"><div style="width:${pct}%"></div></div>
-    </div>`;
-    }).join("");
+      return `<button class="queue-chip ${engine2.activeCustomerId === c.id ? "active" : ""}" data-cid="${c.id}">
+      <span class="queue-avatar">${customerEmoji(c.personality)}</span><span class="queue-customer-copy"><b>${c.name}</b><small>${c.personality}</small><span class="patience-bar ${cls}"><i style="width:${pct}%"></i></span></span><span class="queue-arrow">›</span></button>`;
+    }).join("")}</div>`;
     container.querySelectorAll(".queue-chip").forEach((el) => {
       el.onclick = () => {
         engine2.dispatch({ type: "SERVE_CUSTOMER", payload: { customerId: el.dataset.cid } });
@@ -2358,39 +2362,38 @@
     const state = engine2.state;
     const customer = state.customers.find((c) => c.id === engine2.activeCustomerId);
     if (!customer) {
-      container.innerHTML = `<div class="empty-hint">Ch\u1ECDn m\u1ED9t kh\xE1ch \u1EDF h\xE0ng ch\u1EDD ph\xEDa tr\xEAn \u0111\u1EC3 b\u1EAFt \u0111\u1EA7u ph\u1EE5c v\u1EE5.</div>`;
+      container.innerHTML = '<div class="empty-hint">Chọn khách đang chờ để bắt đầu lấy hàng.</div>';
       return;
     }
-    const shelves = categories.map((cat) => {
-      const items = products.filter((p) => p.category === cat.id);
-      return `<div class="shelf-group"><div class="label">${cat.icon} ${cat.name}</div>${items.map((p) => {
-        const qty = InventorySystem.totalQty(state, p.id);
-        const price = PricingSystem.effectivePrice(state, p.id);
-        const needed = customer.cart.find((l) => l.productId === p.id && l.fulfilled < l.quantity);
-        return `<div class="product-chip ${qty === 0 ? "disabled" : ""} ${needed ? "needed" : ""}" data-pid="${qty === 0 ? "" : p.id}" title="${p.name}">
-        <span class="ic">${p.icon}</span><span class="q">${qty === 0 ? "H\u1EBFt" : qty}</span><span>${formatMoney(price)}</span>
-      </div>`;
-      }).join("")}</div>`;
+    const totalRequested = customer.cart.reduce((n, line) => n + line.quantity, 0);
+    const totalCollected = customer.cart.reduce((n, line) => n + line.fulfilled, 0);
+    const complete = totalCollected >= totalRequested;
+    const pct = totalRequested ? Math.round(totalCollected / totalRequested * 100) : 100;
+    const rows = customer.cart.map((line) => {
+      const p = products.find((item) => item.id === line.productId);
+      const qty = InventorySystem.totalQty(state, line.productId);
+      const lineDone = line.fulfilled >= line.quantity;
+      const price = PricingSystem.effectivePrice(state, line.productId);
+      return `<article class="pick-card ${lineDone ? "picked" : ""}"><span class="pick-icon">${p?.icon || "📦"}</span>
+        <span class="pick-copy"><b>${p?.name || line.productId}</b><small>${formatMoney(price)} · còn ${qty} trong kho</small><span class="pick-meter"><i style="width:${Math.min(100, line.fulfilled / line.quantity * 100)}%"></i></span></span>
+        <span class="pick-quantity">${line.fulfilled}<small>/${line.quantity}</small></span>
+        ${line.fulfilled < line.quantity ? `<button class="pick-action" data-pick="${line.productId}" ${qty < 1 ? "disabled" : ""}>${qty < 1 ? "Hết hàng" : "＋ Lấy món"}</button>` : `<button class="pick-return" data-return="${line.productId}" aria-label="Bỏ một món">−</button>`}</article>`;
     }).join("");
+    const total = Math.round(customer.cart.reduce((sum, line) => sum + PricingSystem.effectivePrice(state, line.productId) * line.fulfilled, 0) * customer.rewardBoost);
+    const missing = Math.max(0, totalRequested - totalCollected);
     container.innerHTML = `
-    <div class="order-box">
-      <div style="margin-bottom:6px;"><b>${customer.name}</b> (${customer.personality})<br/>${CustomerSystem.orderSpeechText(state, customer)}</div>
-      ${customer.cart.map((l) => {
-      const p = state.products[l.productId];
-      const done = l.fulfilled >= l.quantity;
-      return `<div class="order-line ${done ? "complete" : ""}">${p?.icon || ""} ${p?.name || l.productId} \u2014 ${l.fulfilled}/${l.quantity}
-          ${l.fulfilled > 0 ? `<button class="btn secondary small" data-return="${l.productId}">B\u1ECF m\xF3n</button>` : ""}</div>`;
-    }).join("")}
-      <div style="display:flex;gap:8px;margin-top:8px;">
-        <button class="btn success block" id="btnComplete">\u2705 Thanh to\xE1n</button>
-        <button class="btn danger block" id="btnCancel">\u2716 H\u1EE7y \u0111\u01A1n</button>
-      </div>
-    </div>
-    <div>${shelves}</div>
+    <section class="order-panel"><header class="order-heading"><span class="order-avatar">${customerEmoji(customer.personality)}</span>
+      <span class="order-customer"><small>ĐANG PHỤC VỤ</small><b>${customer.name}</b><span>${customer.personality}</span></span><span class="order-count">${totalCollected}<small> / ${totalRequested}</small></span></header>
+      <div class="customer-speech"><span class="speech-mark">“</span>${CustomerSystem.orderSpeechText(state, customer)}</div>
+      <div class="order-progress"><div><b>${complete ? "Đã lấy đủ hàng" : "Danh sách khách cần mua"}</b><span>${complete ? "Có thể mang ra quầy" : `Còn thiếu ${missing} món`}</span></div><i><b style="width:${pct}%"></b></i></div>
+      <div class="pick-list">${rows}</div>
+      <footer class="order-footer"><button class="btn danger order-cancel" id="btnCancel">Hủy đơn</button><span class="order-total"><small>TẠM TÍNH</small><b>${formatMoney(total)}</b></span>
+      <button class="btn success order-checkout" id="btnComplete" ${complete ? "" : "disabled"}>${complete ? "Mang ra quầy ›" : `Còn thiếu ${missing} món`}</button></footer>
+    </section>
   `;
-    container.querySelectorAll('.product-chip[data-pid]:not([data-pid=""])').forEach((el) => {
+    container.querySelectorAll("[data-pick]").forEach((el) => {
       el.onclick = () => {
-        engine2.dispatch({ type: "SELL_PRODUCT", payload: { customerId: customer.id, productId: el.dataset.pid } });
+        engine2.dispatch({ type: "SELL_PRODUCT", payload: { customerId: customer.id, productId: el.dataset.pick } });
         refresh();
       };
     });
@@ -2400,14 +2403,18 @@
         refresh();
       };
     });
-    container.querySelector("#btnComplete").onclick = () => {
-      engine2.dispatch({ type: "COMPLETE_ORDER", payload: { customerId: customer.id } });
-      refresh();
-    };
+    container.querySelector("#btnComplete").onclick = () => { if (complete) { engine2.dispatch({ type: "COMPLETE_ORDER", payload: { customerId: customer.id } }); refresh(); } };
     container.querySelector("#btnCancel").onclick = () => {
       engine2.dispatch({ type: "CANCEL_ORDER", payload: { customerId: customer.id } });
       refresh();
     };
+  }
+  function customerEmoji(personality = "") {
+    if (/bà|cô|mẹ/i.test(personality)) return "👩🏻";
+    if (/chú|anh|công nhân|xe ôm/i.test(personality)) return "👨🏻";
+    if (/trẻ con/i.test(personality)) return "🧒🏻";
+    if (/vip|giàu/i.test(personality)) return "🧑🏻‍💼";
+    return "🧑🏻";
   }
 
   // js/ui/InventoryUI.js
@@ -2787,11 +2794,22 @@
     const panelArea = container.querySelector("#panelArea");
     const queueStrip = container.querySelector("#queueStrip");
     const eventModalRoot = container.querySelector("#eventModalRoot");
+    let lastOrderCustomerId = null;
     function refreshPanel() {
       renderQueueStrip(queueStrip, engine2, refreshPanel);
       if (engine2.activeCustomerId && engine2.state.customers.some((c) => c.id === engine2.activeCustomerId)) {
+        if (window.matchMedia("(max-width: 900px), (pointer: coarse)").matches && lastOrderCustomerId !== engine2.activeCustomerId) {
+          uiState.mobilePanelOpen = true;
+          panelArea.classList.remove("closed");
+        }
+        lastOrderCustomerId = engine2.activeCustomerId;
         renderOrderPanel(panelArea, engine2, refreshPanel);
       } else {
+        if (window.matchMedia("(max-width: 900px), (pointer: coarse)").matches && lastOrderCustomerId !== null) {
+          uiState.mobilePanelOpen = false;
+          panelArea.classList.add("closed");
+        }
+        lastOrderCustomerId = null;
         const fn = PANEL_RENDERERS[uiState.tab] || renderInventoryPanel;
         fn(panelArea, engine2, refreshPanel);
       }
@@ -2837,8 +2855,8 @@
       } else {
         openBtn.textContent = "...";
         openBtn.disabled = true;
-      }
     }
+  }
     container.querySelectorAll("#speedBtns button").forEach((b) => {
       b.onclick = () => {
         engine2.dispatch({ type: "SET_SPEED", payload: { speed: Number(b.dataset.speed) } });
