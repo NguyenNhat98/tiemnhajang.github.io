@@ -2424,7 +2424,7 @@
     const rows = categories.map((cat) => {
       const items = products.filter((p) => p.category === cat.id);
       return `<h3>${cat.icon} ${cat.name}</h3>
-    <table><thead><tr><th>S\u1EA3n ph\u1EA9m</th><th>T\u1ED3n kho</th><th>Gi\xE1 nh\u1EADp</th><th>SL nh\u1EADp</th><th></th><th>Gi\xE1 b\xE1n</th></tr></thead>
+    <table class="inventory-table"><thead><tr><th>S\u1EA3n ph\u1EA9m</th><th>T\u1ED3n kho</th><th>Gi\xE1 nh\u1EADp</th><th>SL nh\u1EADp</th><th></th><th>Gi\xE1 b\xE1n</th></tr></thead>
     <tbody>${items.map((p) => {
         const qty = InventorySystem.totalQty(state, p.id);
         const buyPrice = state.market[p.id]?.buyPrice || p.cost;
@@ -2680,7 +2680,7 @@
       return;
     }
     container.innerHTML = `<div class="panel-card"><h2 style="margin-top:0;">\u{1F4CA} L\u1ECBch s\u1EED kinh doanh</h2>
-    <table><thead><tr><th>Ng\xE0y</th><th>Doanh thu</th><th>L\xE3i r\xF2ng</th><th>Uy t\xEDn</th><th>Kh\xE1ch</th></tr></thead>
+    <table class="inventory-table"><thead><tr><th>Ng\xE0y</th><th>Doanh thu</th><th>L\xE3i r\xF2ng</th><th>Uy t\xEDn</th><th>Kh\xE1ch</th></tr></thead>
     <tbody>${state.history.slice(0, 30).map((h) => `<tr>
       <td>${h.day}</td><td>${formatMoney(h.revenue)}</td>
       <td style="color:${h.netProfit >= 0 ? "var(--green)" : "var(--red)"}">${formatMoney(h.netProfit)}</td>
@@ -2771,18 +2771,18 @@
       <div id="worldArea">
         <div id="canvasWrap"><canvas id="gameCanvas"></canvas></div>
         <div id="queueStrip"></div>
+        <div id="timeBar">
+          <span id="timeLabel" class="stat-pill"></span>
+          <div class="time-track"><div id="timeFill"></div></div>
+          <div class="speed-btns" id="speedBtns">
+            <button data-speed="1">1x</button><button data-speed="2">2x</button><button data-speed="4">4x</button>
+          </div>
+          <button class="btn small" id="btnOpenClose"></button>
+        </div>
         <div id="panelArea"></div>
       </div>
     </div>
     <div id="mobileNav">${TABS.map(([id, label]) => `<button data-tab="${id}">${label}</button>`).join("")}</div>
-    <div id="timeBar">
-      <span id="timeLabel" class="stat-pill"></span>
-      <div class="time-track"><div id="timeFill"></div></div>
-      <div class="speed-btns" id="speedBtns">
-        <button data-speed="1">1x</button><button data-speed="2">2x</button><button data-speed="4">4x</button>
-      </div>
-      <button class="btn small" id="btnOpenClose"></button>
-    </div>
     <div id="eventModalRoot"></div>
     <div id="toastWrap" class="toast-wrap"></div>
   `;

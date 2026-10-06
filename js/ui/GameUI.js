@@ -42,18 +42,18 @@ export function mountGameScreen(container, engine, renderer, world, sfx, handler
       <div id="worldArea">
         <div id="canvasWrap"><canvas id="gameCanvas"></canvas></div>
         <div id="queueStrip"></div>
+        <div id="timeBar">
+          <span id="timeLabel" class="stat-pill"></span>
+          <div class="time-track"><div id="timeFill"></div></div>
+          <div class="speed-btns" id="speedBtns">
+            <button data-speed="1">1x</button><button data-speed="2">2x</button><button data-speed="4">4x</button>
+          </div>
+          <button class="btn small" id="btnOpenClose"></button>
+        </div>
         <div id="panelArea"></div>
       </div>
     </div>
     <div id="mobileNav">${TABS.map(([id, label]) => `<button data-tab="${id}">${label}</button>`).join('')}</div>
-    <div id="timeBar">
-      <span id="timeLabel" class="stat-pill"></span>
-      <div class="time-track"><div id="timeFill"></div></div>
-      <div class="speed-btns" id="speedBtns">
-        <button data-speed="1">1x</button><button data-speed="2">2x</button><button data-speed="4">4x</button>
-      </div>
-      <button class="btn small" id="btnOpenClose"></button>
-    </div>
     <div id="eventModalRoot"></div>
     <div id="toastWrap" class="toast-wrap"></div>
   `;

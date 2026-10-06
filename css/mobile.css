@@ -27,5 +27,19 @@
   #timeLabel { font-size: 10px; }
   .speed-btns button { padding: 7px 9px; }
   #btnOpenClose { min-height: 38px; }
+  #panelArea .inventory-table { display: block; width: 100%; max-width: 100%; white-space: normal; overflow: visible; }
+  #panelArea .inventory-table thead { display: none; }
+  #panelArea .inventory-table tbody { display: grid; gap: 7px; }
+  #panelArea .inventory-table tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px 8px; padding: 8px; border: 1px solid var(--border); border-radius: 10px; background: #fff; }
+  #panelArea .inventory-table td { display: flex; align-items: center; justify-content: space-between; gap: 5px; min-width: 0; padding: 3px 0; font-size: 11px; }
+  #panelArea .inventory-table td:first-child { grid-column: 1 / -1; justify-content: flex-start; font-weight: 700; }
+  #panelArea .inventory-table td::before { color: var(--muted); font-size: 10px; font-weight: 600; }
+  #panelArea .inventory-table td:nth-child(2)::before { content: 'Tồn kho'; }
+  #panelArea .inventory-table td:nth-child(3)::before { content: 'Giá nhập'; }
+  #panelArea .inventory-table td:nth-child(4)::before { content: 'SL nhập'; }
+  #panelArea .inventory-table td:nth-child(5)::before { content: 'Nhập'; }
+  #panelArea .inventory-table td:nth-child(6)::before { content: 'Giá bán'; }
+  #panelArea .inventory-table input { width: 72px !important; max-width: 42vw; min-height: 34px; padding: 5px; }
+  #panelArea .inventory-table .btn { padding: 6px 9px; }
 }
 #mobileNav { display: none; }

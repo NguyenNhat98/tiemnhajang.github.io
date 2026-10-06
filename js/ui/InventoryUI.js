@@ -9,7 +9,7 @@ export function renderInventoryPanel(container, engine, refresh) {
   const rows = categories.map((cat) => {
     const items = products.filter((p) => p.category === cat.id);
     return `<h3>${cat.icon} ${cat.name}</h3>
-    <table><thead><tr><th>Sản phẩm</th><th>Tồn kho</th><th>Giá nhập</th><th>SL nhập</th><th></th><th>Giá bán</th></tr></thead>
+    <table class="inventory-table"><thead><tr><th>Sản phẩm</th><th>Tồn kho</th><th>Giá nhập</th><th>SL nhập</th><th></th><th>Giá bán</th></tr></thead>
     <tbody>${items.map((p) => {
       const qty = InventorySystem.totalQty(state, p.id);
       const buyPrice = state.market[p.id]?.buyPrice || p.cost;
